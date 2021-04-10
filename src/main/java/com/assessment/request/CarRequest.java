@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 public class CarRequest {
 
