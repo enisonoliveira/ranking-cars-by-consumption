@@ -42,11 +42,11 @@ public class CarsService implements CarsServiceImpl{
        return carsRepository.save(car);
     }
 
-    public List<RankingCarResponse> rankingList(
-                                                 double totalKMCity,
-                                                 double totalKMHways, double gasolPrice
-                                                )   
-                                                throws Exception
+    public List<RankingCarResponse> rankingList
+    (
+        double totalKMCity,
+        double totalKMHways, double gasolPrice
+    )   throws Exception
     {
         validateDataSearch(totalKMCity,totalKMHways,gasolPrice);
         ArrayList <RankingCarResponse> colRanking = new ArrayList<>();
@@ -62,11 +62,12 @@ public class CarsService implements CarsServiceImpl{
         return colRanking;
     }
 
-    public boolean validateDataSearch(
-                                        double totalKMCity,double totalKMHways
-                                        ,double gasolPrice
-                                    )
-                                    throws Exception
+    public boolean validateDataSearch
+    (
+        double totalKMCity,
+        double totalKMHways,
+        double gasolPrice
+    )   throws Exception
     {
         if(totalKMCity==0.0|| totalKMHways==0.0 || gasolPrice==0)
         {
@@ -92,7 +93,7 @@ public class CarsService implements CarsServiceImpl{
     }
 
    
-    private Sort sortByIdAsc() 
+    public Sort sortByIdAsc() 
     {
         ArrayList<Order> colOrder = new ArrayList<>();
         colOrder.add( Order.desc("cs_fuel_city_km_l"));
@@ -100,7 +101,7 @@ public class CarsService implements CarsServiceImpl{
         return  Sort.by(colOrder);
     }
 
-    private List<Car>gasolRankingCar( List<Car> colCar)
+    public List<Car>gasolRankingCar( List<Car> colCar)
     {
         Car newCar=null;
 		int size = colCar.size();
