@@ -61,7 +61,7 @@ public class CarsService implements CarsServiceImpl
        return carsRepository.save(car);
     }
 
-   
+   @Async
     public List<RankingCarResponse> rankingList
         (
             double totalKMCity,
@@ -72,10 +72,12 @@ public class CarsService implements CarsServiceImpl
         validateDataSearch(totalKMCity,totalKMHways,gasolPrice);
         ArrayList <RankingCarResponse> colRanking = new ArrayList<>();
         List<Car> colCar =findAll();
+        int a=0;
         for(Car car : colCar){
+            a++;
             colRanking.add
             ( new  RankingCarResponse
-                ( car.getName(), car.getBrand(), car.getYear(),car.getCsFuelCityKML()
+                ( String.valueOf(a)+"°", car.getName(), car.getBrand(), car.getYear(),car.getCsFuelCityKML()
                     ,car.getCsFuelHighwaysKML(), totalKMCity,totalKMHways,gasolPrice
                 )
             );

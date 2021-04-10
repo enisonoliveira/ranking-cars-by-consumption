@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RankingCarResponse {
+    private String ranking;
     private String name;
     private String brand;
     private Date year;
@@ -16,6 +17,7 @@ public class RankingCarResponse {
 
     @JsonCreator
     public RankingCarResponse(
+            @JsonProperty("ranking") String ranking,
             @JsonProperty("name") String name,
             @JsonProperty("brand") String brand,
             @JsonProperty("year") Date year,
@@ -26,6 +28,7 @@ public class RankingCarResponse {
             @JsonProperty("gasolPrice") Double gasolPrice
         ) 
     {
+        this.setRanking(ranking);
         this.setName(name);
         this.setBrand(brand);
         this.year = year;
@@ -33,6 +36,16 @@ public class RankingCarResponse {
         this.csFuelHighwaysKML = csFuelHighwaysKML;
         this.totalKMCity = totalKMCity* csFuelCityKML*gasolPrice;
         this.totalKMHways = totalKMHways* csFuelHighwaysKML*gasolPrice;
+    }
+
+
+    public String getRanking() {
+        return ranking;
+    }
+
+
+    public void setRanking(String ranking) {
+        this.ranking = ranking;
     }
 
 
@@ -65,26 +78,21 @@ public class RankingCarResponse {
         this.year = year;
     }
 
-
     public Double getCsFuelCityKML() {
         return csFuelCityKML;
     }
-
 
     public void setCsFuelCityKML(Double csFuelCityKML) {
         this.csFuelCityKML = csFuelCityKML;
     }
 
-
     public Double getCsFuelHighwaysKML() {
         return csFuelHighwaysKML;
     }
 
-
     public void setCsFuelHighwaysKML(Double csFuelHighwaysKML) {
         this.csFuelHighwaysKML = csFuelHighwaysKML;
     }
-
 
     public Double getTotalKMCity() {
         return totalKMCity;
