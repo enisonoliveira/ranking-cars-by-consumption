@@ -16,18 +16,14 @@ public class RankingCarResponse {
 
     @JsonCreator
     public RankingCarResponse(
-            @JsonProperty("name")  String name,
-            @JsonProperty("brand")  String brand,
-            @JsonProperty("year")   Date year,
-            @JsonProperty("csFuelCityKML")  Double csFuelCityKML ,
-            @JsonProperty("csFuelHighwaysKML") 
-            Double csFuelHighwaysKML,
-            @JsonProperty("totalKMCity") 
-            Double totalKMCity,
-            @JsonProperty("totalKMHways") 
-            Double totalKMHways,
-            @JsonProperty("gasolPrice") 
-            double gasolPrice
+            @JsonProperty("name") String name,
+            @JsonProperty("brand") String brand,
+            @JsonProperty("year") Date year,
+            @JsonProperty("csFuelCityKML") Double csFuelCityKML ,
+            @JsonProperty("csFuelHighwaysKML") Double csFuelHighwaysKML,
+            @JsonProperty("totalKMCity") Double totalKMCity,
+            @JsonProperty("totalKMHways") Double totalKMHways,
+            @JsonProperty("gasolPrice") Double gasolPrice
         ) 
     {
         this.setName(name);
