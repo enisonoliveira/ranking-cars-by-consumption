@@ -30,6 +30,7 @@ public class CarsService implements CarsServiceImpl
 
     public Car saveConverter(CarRequest request) throws Exception
     {
+        logger.info("Convert RequestCar to document Car");
         return  save( new Car(  
                                 request.getName(),
                                 request.getModel(),
@@ -65,7 +66,8 @@ public class CarsService implements CarsServiceImpl
     public List<RankingCarResponse> rankingList
         (
             double totalKMCity,
-            double totalKMHways, double gasolPrice
+            double totalKMHways, 
+            double gasolPrice
         )   throws Exception
     {
         logger.info("Ranking all...");

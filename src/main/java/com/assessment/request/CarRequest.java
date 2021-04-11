@@ -3,7 +3,6 @@ package com.assessment.request;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,7 +12,7 @@ public class CarRequest {
     private String name;
     private String brand;
     private String model;
-    private Date year;
+    private String year;
     private Double csFuelCityKML;
     private Double csFuelHighwaysKML;
 
@@ -22,7 +21,7 @@ public class CarRequest {
             @JsonProperty("name")  String name,
             @JsonProperty("model")  String model,
             @JsonProperty("brand")  String brand,
-            @JsonProperty("year")   Date year,
+            @JsonProperty("year")   String year,
             @JsonProperty("csFuelCityKML")  Double csFuelCityKML ,
             @JsonProperty("csFuelHighwaysKML") Double csFuelHighwaysKML
         ) 
@@ -59,11 +58,11 @@ public class CarRequest {
         this.model = model;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

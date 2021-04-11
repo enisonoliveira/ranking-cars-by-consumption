@@ -59,7 +59,7 @@ public class RankingCarController {
         .body(jsonString);
     }
 
-    @GetMapping (value = "/ranking")
+    @GetMapping (value = "/list")
     @ResponseStatus ( HttpStatus.OK)
     public ResponseEntity<String> rankingList
         (  
@@ -74,7 +74,7 @@ public class RankingCarController {
         Gson gson = new Gson ( );
        
         return ResponseEntity
-        .status( HttpStatus.CREATED)
+        .status( HttpStatus.OK)
         .header("X-Reason", "ok")
         .body(gson.toJson(colResponse));
     }

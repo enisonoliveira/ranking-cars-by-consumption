@@ -1,7 +1,5 @@
 package com.assessment.response;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +7,7 @@ public class RankingCarResponse {
     private String ranking;
     private String name;
     private String brand;
-    private Date year;
+    private String year;
     private Double csFuelCityKML;
     private Double csFuelHighwaysKML;
     private Double totalKMCity;
@@ -20,7 +18,7 @@ public class RankingCarResponse {
             @JsonProperty("ranking") String ranking,
             @JsonProperty("name") String name,
             @JsonProperty("brand") String brand,
-            @JsonProperty("year") Date year,
+            @JsonProperty("year") String year,
             @JsonProperty("csFuelCityKML") Double csFuelCityKML ,
             @JsonProperty("csFuelHighwaysKML") Double csFuelHighwaysKML,
             @JsonProperty("totalKMCity") Double totalKMCity,
@@ -31,7 +29,7 @@ public class RankingCarResponse {
         this.setRanking(ranking);
         this.setName(name);
         this.setBrand(brand);
-        this.year = year;
+        this.year =  year;;
         this.csFuelCityKML = csFuelCityKML;
         this.csFuelHighwaysKML = csFuelHighwaysKML;
         this.totalKMCity = (totalKMCity/ csFuelCityKML)*gasolPrice;
@@ -69,12 +67,12 @@ public class RankingCarResponse {
     }
 
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

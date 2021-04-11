@@ -5,8 +5,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
-
 @Document(collection = "cars")
 public class Car {
     @Id
@@ -24,7 +22,7 @@ public class Car {
     private String brand;
 
     @Field("year")
-    private Date year;
+    private String year;
 
     /*cs = consumption  */
     @Field("cs_fuel_city_km_l")
@@ -34,7 +32,7 @@ public class Car {
     @Field("cs_fuel_highways_km_l")
     private Double csFuelHighwaysKML;
 
-    public Car(String name, String model, String brand, Date year, Double csFuelCityKML, Double csFuelHighwaysKML) {
+    public Car(String name, String model, String brand, String year, Double csFuelCityKML, Double csFuelHighwaysKML) {
         this.name = name;
         this.brand = brand;
         this.model = model;
@@ -67,11 +65,11 @@ public class Car {
         this.brand = brand;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
