@@ -31,15 +31,17 @@ public class CarsService implements CarsServiceImpl
     public Car saveConverter(CarRequest request) throws Exception
     {
         logger.info("Convert RequestCar to document Car");
-        return  save( new Car(  
-                                request.getName(),
-                                request.getModel(),
-                                request.getBrand(),
-                                request.getYear(),
-                                request.getCsFuelCityKML(),
-                                request.getCsFuelHighwaysKML()
-                            )
+
+        Car car =new Car(  
+                    request.getName(),
+                    request.getBrand(),
+                    request.getModel(),
+                    request.getYear(),
+                    request.getCsFuelCityKML(),
+                    request.getCsFuelHighwaysKML()
                 );
+
+        return  save( car );
     }
     
     public Car save(Car car)  throws Exception   
