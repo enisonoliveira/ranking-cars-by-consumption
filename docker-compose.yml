@@ -1,0 +1,19 @@
+version: "3.8"
+
+networks:
+  default:
+    external:
+      name: backend
+services:
+  mymoviedb:
+    image: mongo:latest
+    container_name: api-database
+    ports:
+      - 27017:27017
+  movie-app-image:
+    image: api-ranking-car
+    container_name: api-ranking-car
+    ports:
+      - 8080:8080
+    links:
+      - api-database
