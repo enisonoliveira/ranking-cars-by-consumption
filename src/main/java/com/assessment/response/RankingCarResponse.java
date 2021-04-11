@@ -34,8 +34,8 @@ public class RankingCarResponse {
         this.year = year;
         this.csFuelCityKML = csFuelCityKML;
         this.csFuelHighwaysKML = csFuelHighwaysKML;
-        this.totalKMCity = totalKMCity* csFuelCityKML*gasolPrice;
-        this.totalKMHways = totalKMHways* csFuelHighwaysKML*gasolPrice;
+        this.totalKMCity = (totalKMCity/ csFuelCityKML)*gasolPrice;
+        this.totalKMHways = (totalKMHways/ csFuelHighwaysKML)*gasolPrice;
     }
 
 

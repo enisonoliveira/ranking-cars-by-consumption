@@ -8,15 +8,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 import java.util.List;
-
-import com.assessment.document.Car;
 import com.assessment.response.RankingCarResponse;
+import com.assessment.document.Car;
+import com.assessment.request.CarRequest;
 import com.assessment.service.CarsService;
+import com.google.gson.Gson;
+import org.springframework.http.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 class AssessmentApplicationTests {
 
 
@@ -25,6 +35,10 @@ class AssessmentApplicationTests {
 	@Autowired
     CarsService carService;
 
+	private Gson gson = new Gson();
+	
+    @Autowired
+	private MockMvc mockMvc;
 
 	@Test
 	void contextLoads() throws Exception
@@ -41,14 +55,21 @@ class AssessmentApplicationTests {
 		carService.save(new Car("Chevrolet Onix Turbo","1.0 Turbo","Chevrolet", new Date(), 8.10, 12.6));
 		carService.save( new Car("Chevrolet Joy 1.0","Joy 1.0","Chevrolet", new Date(),12.80, 15.20));
         carService.save(new Car("Volkswagen up!","1.0 TSI","Volkswagen", new Date(), 14.30, 16.30));
+		
+		mockMvc = MockMvcBuilders.standaloneSetup
+					(new  CarRequest(
+								"Ford Fiesta 1.4"," Fiesta 1.4","Ford",
+									new Date(), 13.14, 15.15
+							)
+					).build();
 	}
 	
     @Test
-    public void testRankingCarService()  throws Exception{
+    public void testRankinCarService() throws Exception {
 
-		List<RankingCarResponse>colRanking= carService.rankingList(10.00, 10.00, 5.00); 
-		for(int a=0 ;a< colRanking.size();a++  ){
-			RankingCarResponse rankin= colRanking.get(a);
+		List<RankingCarResponse>colRankin= carService.rankingList(10.00, 10.00, 5.00); 
+		for(int a=0 ;a< colRankin.size();a++  ){
+			RankingCarResponse rankin= colRankin.get(a);
 			logger.info(":"+rankin.getName() +" previa cidade:"+rankin.getTotalKMCity() +" previa rodovia:"+rankin.getTotalKMHways());
 			switch (a) {
 				case 0: assertEquals("Volkswagen up!", rankin.getName()); break;
@@ -68,23 +89,23 @@ class AssessmentApplicationTests {
 	}
 
     @Test
-    public void testRankingCarCsCityService() throws Exception {
+    public void testRankinCarCsHwaysService() throws Exception {
 
-		List<RankingCarResponse>colRanking= carService.rankingList(10.00, 10.00, 5.00); 
-		for(int a=0 ;a< colRanking.size();a++  ){
-			RankingCarResponse rankin= colRanking.get(a);
+		List<RankingCarResponse>colRankin= carService.rankingList(10.00, 10.00, 5.00); 
+		for(int a=0 ;a< colRankin.size();a++  ){
+			RankingCarResponse rankin= colRankin.get(a);
 			logger.info(":"+rankin.getName() +" previa cidade:"+rankin.getTotalKMCity() +" previa rodovia:"+rankin.getTotalKMHways());
 			switch (a) {
-				case 0: assertEquals(715.0, rankin.getTotalKMCity()); break;
-				case 1: assertEquals(695.0, rankin.getTotalKMCity());break;
-				case 2: assertEquals(745.0, rankin.getTotalKMCity());break;
-				case 3: assertEquals(700.0, rankin.getTotalKMCity());break;
-				case 4: assertEquals(695.0, rankin.getTotalKMCity());break;
-				case 5: assertEquals(710.0, rankin.getTotalKMCity());break;
-				case 6: assertEquals(660.0, rankin.getTotalKMCity());break;
-				case 7: assertEquals(657.0, rankin.getTotalKMCity());break;
-				case 8: assertEquals(640.0, rankin.getTotalKMCity());break;
-				case 9: assertEquals(405.0, rankin.getTotalKMCity());break;
+				case 0: assertEquals(3.067484662576687, rankin.getTotalKMHways()); break;
+				case 1: assertEquals(2.9940119760479043, rankin.getTotalKMHways());break;
+				case 2: assertEquals(3.2051282051282053, rankin.getTotalKMHways());break;
+				case 3: assertEquals(3.144654088050314, rankin.getTotalKMHways());break;
+				case 4: assertEquals(3.225806451612903, rankin.getTotalKMHways());break;
+				case 5: assertEquals(3.3112582781456954, rankin.getTotalKMHways());break;
+				case 6: assertEquals(3.2894736842105265, rankin.getTotalKMHways());break;
+				case 7: assertEquals(3.3003300330033003, rankin.getTotalKMHways());break;
+				case 8: assertEquals(3.2894736842105265, rankin.getTotalKMHways());break;
+				case 9: assertEquals(3.9682539682539684, rankin.getTotalKMHways());break;
 				default: break;
 			}
 			
@@ -93,23 +114,23 @@ class AssessmentApplicationTests {
     }
 
 	@Test
-    public void testRankingCarCsHwaysService() throws Exception {
+    public void testRankinCarCsCityService() throws Exception {
 
-		List<RankingCarResponse>colRanking= carService.rankingList(10.00, 10.00, 5.00); 
-		for(int a=0 ;a< colRanking.size();a++  ){
-			RankingCarResponse rankin= colRanking.get(a);
+		List<RankingCarResponse>colRankin= carService.rankingList(10.00, 10.00, 5.00); 
+		for(int a=0 ;a< colRankin.size();a++  ){
+			RankingCarResponse rankin= colRankin.get(a);
 			logger.info(":"+rankin.getName() +" previa cidade:"+rankin.getTotalKMCity() +" previa rodovia:"+rankin.getTotalKMHways());
 			switch (a) {
-				case 0: assertEquals(815.0, rankin.getTotalKMHways()); break;
-				case 1: assertEquals(835.0, rankin.getTotalKMHways());break;
-				case 2: assertEquals(780.0, rankin.getTotalKMHways());break;
-				case 3: assertEquals(795.0, rankin.getTotalKMHways());break;
-				case 4: assertEquals(775.0, rankin.getTotalKMHways());break;
-				case 5: assertEquals(755.0, rankin.getTotalKMHways());break;
-				case 6: assertEquals(760.0, rankin.getTotalKMHways());break;
-				case 7: assertEquals(757.5, rankin.getTotalKMHways());break;
-				case 8: assertEquals(760.0, rankin.getTotalKMHways());break;
-				case 9: assertEquals(630.0, rankin.getTotalKMHways());break;
+				case 0: assertEquals(3.4965034965034962, rankin.getTotalKMCity()); break;
+				case 1: assertEquals(3.597122302158273, rankin.getTotalKMCity());break;
+				case 2: assertEquals(3.3557046979865772, rankin.getTotalKMCity());break;
+				case 3: assertEquals(3.5714285714285716, rankin.getTotalKMCity());break;
+				case 4: assertEquals(3.597122302158273, rankin.getTotalKMCity());break;
+				case 5: assertEquals(3.5211267605633805, rankin.getTotalKMCity());break;
+				case 6: assertEquals(3.787878787878788, rankin.getTotalKMCity());break;
+				case 7: assertEquals(3.8051750380517504, rankin.getTotalKMCity());break;
+				case 8: assertEquals(3.90625, rankin.getTotalKMCity());break;
+				case 9: assertEquals(6.17283950617284, rankin.getTotalKMCity());break;
 				default: break;
 			}
 			
@@ -117,5 +138,20 @@ class AssessmentApplicationTests {
 
     }
 
+	@Test
+	public void rankinController() throws Exception 
+	{
+		String jsonRequest = gson.toJson(
+								new CarRequest(
+									"Ford Fiesta 1.4","Fiesta 1.4","Ford", null, 10.14, 13.15
+								)
+							);
+		logger.info(jsonRequest);
+		mockMvc.perform(
+		post("/raking/car/save?")
+		.contentType(MediaType.APPLICATION_JSON).content(jsonRequest))
+		.andDo(print())
+		.andExpect(status().isCreated());
+	}
 
 }

@@ -9,7 +9,6 @@ import java.util.Date;
 
 @Document(collection = "cars")
 public class Car {
-
     @Id
     private String id;
 
