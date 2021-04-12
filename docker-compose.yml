@@ -1,19 +1,16 @@
-version: "3.8"
-
-networks:
-  default:
-    external:
-      name: backend
+version: "3"
 services:
-  mymoviedb:
-    image: mongo:latest
-    container_name: api-database
+  api-database:
+    image: tutum/mongodb
+    container_name: "api-database"
+    environment:
+      AUTH: "no"
     ports:
       - 27017:27017
-  movie-app-image:
+      - 28017:28017
+  api:
     image: api-ranking-car
-    container_name: api-ranking-car
     ports:
-      - 8080:8080
+      - 9091:8080
     links:
       - api-database

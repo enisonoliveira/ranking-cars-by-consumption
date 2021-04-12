@@ -46,7 +46,7 @@ public class CarsService implements CarsServiceImpl
     
     public Car save(Car car)  throws Exception   
     {
-        logger.info("Init save operation save");
+        logger.info("Init operation save");
         if((findByName(car.getName())))
         {
             throw  new  DuplicateFormatFlagsException 
@@ -141,21 +141,21 @@ public class CarsService implements CarsServiceImpl
         logger.info("Wait i'm that working this...");
         Car newCar=null;
 		int size = colCar.size();
-		double newCarCal=0.0;
+		double newCarCalc=0.0;
         ArrayList<Car>colCarTemp = new ArrayList<>();
 		for(int i = 0; i < size; i++){
             Thread.sleep(1000);
 			for( int a=0;a< colCar.size();a++){
 				Car car = colCar.get(a);
 				double calc= car.getCsFuelCityKML()+ car.getCsFuelHighwaysKML();
-				if(calc>newCarCal){
+				if(calc>newCarCalc){
 					newCar=car;
-					newCarCal=calc;
+					newCarCalc=calc;
 				}
 			}
 			colCarTemp.add(newCar);
      		colCar.remove(newCar);
-			newCarCal=0.0;
+            newCarCalc=0.0;
 		}
         logger.info("OK! Finish working process...");
 		return colCarTemp;
